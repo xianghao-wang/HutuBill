@@ -137,4 +137,11 @@ public class GUIUtil {
 
         cp.show(panel);
     }
+
+    /*
+     *   快速居中显示一个面板
+     * */
+    public static void showPanel(JPanel panel) {
+        showPanel(panel, 0.85);
+    }
 }
