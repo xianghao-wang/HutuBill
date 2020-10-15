@@ -22,6 +22,7 @@ CREATE TABLE record (
     id INT,
     spend INT, # 消费金额
     category_id INT, # 分类的id
+    comment VARCHAR (255),
     date DATE # 消费日期
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
