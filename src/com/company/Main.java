@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.gui.util.GUIUtil;
+import com.company.util.GUIUtil;
 
 import javax.swing.*;
 import java.awt.*;

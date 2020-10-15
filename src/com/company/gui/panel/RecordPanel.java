@@ -1,8 +1,8 @@
 package com.company.gui.panel;
 
 import com.company.gui.model.CategoryComboBoxModel;
-import com.company.gui.util.ColorUtil;
-import com.company.gui.util.GUIUtil;
+import com.company.util.ColorUtil;
+import com.company.util.GUIUtil;
 import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;

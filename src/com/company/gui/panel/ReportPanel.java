@@ -1,6 +1,6 @@
 package com.company.gui.panel;
 
-import com.company.gui.util.ChartUtil;
+import com.company.util.ChartUtil;
 
 import javax.swing.*;
 import java.awt.*;

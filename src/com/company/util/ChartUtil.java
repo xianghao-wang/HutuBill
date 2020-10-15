@@ -1,4 +1,4 @@
-package com.company.gui.util;
+package com.company.util;
 
 import com.objectplanet.chart.BarChart;
 import com.objectplanet.chart.Chart;

@@ -1,8 +1,8 @@
 package com.company.gui.panel;
 
-import com.company.gui.util.CircleProgressBar;
-import com.company.gui.util.ColorUtil;
-import com.company.gui.util.GUIUtil;
+import com.company.util.CircleProgressBar;
+import com.company.util.ColorUtil;
+import com.company.util.GUIUtil;
 
 import javax.swing.*;
 import java.awt.*;

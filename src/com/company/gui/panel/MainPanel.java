@@ -1,7 +1,7 @@
 package com.company.gui.panel;
 
-import com.company.gui.util.CenterPanel;
-import com.company.gui.util.GUIUtil;
+import com.company.util.CenterPanel;
+import com.company.util.GUIUtil;
 
 import javax.swing.*;
 import java.awt.*;

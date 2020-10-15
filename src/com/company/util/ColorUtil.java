@@ -1,4 +1,4 @@
-package com.company.gui.util;
+package com.company.util;
 
 import java.awt.*;
 
