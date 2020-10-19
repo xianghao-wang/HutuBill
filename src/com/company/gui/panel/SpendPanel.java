@@ -36,8 +36,8 @@ public class SpendPanel extends JPanel {
         circleProgressBar.setProgress(0);
 
         // 设置颜色
-        GUIUtil.setColor(ColorUtil.grayColor, lMonthSpend, lTodaySpend, lAverageSpend, lMonthRest, lAverageAvailable, lDaysToEnd);
-        GUIUtil.setColor(ColorUtil.grayColor, vMonthSpend, vTodaySpend, vAverageSpend, vMonthRest, vAverageAvailable, vDaysToEnd);
+        GUIUtil.setColor(ColorUtil.grayColor, lMonthSpend, lTodaySpend, lAverageSpend, lMonthRest, lAverageAvailable, lDaysToEnd, vAverageSpend, vMonthRest, vAverageAvailable, vDaysToEnd);
+        GUIUtil.setColor(ColorUtil.blueColor, vMonthSpend, vTodaySpend);
 
         // 设置字体
         vMonthSpend.setFont(new Font("微软雅黑", Font.BOLD, 23));

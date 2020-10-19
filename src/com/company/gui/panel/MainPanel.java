@@ -1,5 +1,6 @@
 package com.company.gui.panel;
 
+import com.company.gui.listener.ToolbarListener;
 import com.company.util.CenterPanel;
 import com.company.util.GUIUtil;
 
@@ -44,10 +45,23 @@ public class MainPanel extends JPanel {
         toolBar.add(bBackup);
         toolBar.add(bRecover);
 
-        workingPanel = new CenterPanel(0.8);
+        workingPanel = new CenterPanel(0.90);
 
         this.setLayout(new BorderLayout());
         this.add(toolBar, BorderLayout.NORTH);
         this.add(workingPanel, BorderLayout.CENTER);
+
+        // 设置监听器
+        addListener();
+    }
+
+    public void addListener() {
+        ToolbarListener toolbarListener = new ToolbarListener();
+
+        for (Component component : toolBar.getComponents()) {
+            if (component instanceof JButton) {
+                ((JButton) component).addActionListener(toolbarListener);
+            }
+        }
     }
 }

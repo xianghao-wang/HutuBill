@@ -6,9 +6,8 @@ import com.company.util.DBUtil;
 import com.company.util.DateUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 
 public class RecordDAO implements DAO<Record> {
 
@@ -184,5 +183,76 @@ public class RecordDAO implements DAO<Record> {
         }
 
         return total;
+    }
+
+    public List<Record> list(Date start, Date end) {
+        List<Record> items = new ArrayList<>();
+
+        String sql = "SELECT * FROM record WHERE date>=? AND date<=?";
+        try (Connection c = DBUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setDate(1, DateUtil.util2sql(start));
+            ps.setDate(2, DateUtil.util2sql(end));
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int spend = rs.getInt("spend");
+                int category_id = rs.getInt("category_id");
+                String comment = rs.getString("comment");
+                java.sql.Date date = rs.getDate("date");
+
+                Record record = new Record();
+                record.setId(id);
+                record.setSpend(spend);
+                record.setCategory_id(category_id);
+                record.setComment(comment);
+                record.setDate(date);
+
+                items.add(record);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return items;
+    }
+
+    public List<Record> list(Date day) {
+        // 找到一天开始和结束的日期
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(day);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date start = calendar.getTime();
+
+        calendar.add(Calendar.DATE, 1);
+        calendar.add(Calendar.MILLISECOND, -1);
+        Date end = calendar.getTime();
+
+        return list(start, end);
+    }
+
+    public List<Record> listToday() {
+        return list(new Date());
+    }
+
+    public List<Record> listThisMonth() {
+        // 月初和月末
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.DAY_OF_MONTH, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date start = calendar.getTime();
+
+        return null;
+
     }
 }
