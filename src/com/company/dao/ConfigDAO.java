@@ -12,7 +12,7 @@ public class ConfigDAO implements DAO<Config> {
     public void add(Config obj) {
         String sql = "INSERT INTO config VALUE (NULL, ?, ?)";
         try (Connection c = DBUtil.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, obj.getKey());
             ps.setString(2, obj.getValue());

@@ -1,5 +1,6 @@
 package com.company.gui.panel;
 
+import com.company.gui.listener.ConfigListener;
 import com.company.util.ColorUtil;
 import com.company.util.GUIUtil;
 
@@ -12,9 +13,9 @@ public class ConfigPanel extends JPanel {
     // 控件
     JLabel lBudget = new JLabel("本月预算(¥)");
     JLabel lMysql = new JLabel("Mysql安装目录");
-    JTextField tBudget = new JTextField();
-    JTextField tMysql = new JTextField();
-    JButton bSubmit = new JButton("更新");
+    public JTextField tBudget = new JTextField();
+    public JTextField tMysql = new JTextField();
+    public JButton bSubmit = new JButton("更新");
 
     public ConfigPanel() {
         this.setLayout(new BorderLayout());
@@ -25,6 +26,8 @@ public class ConfigPanel extends JPanel {
 
         this.add(north(), BorderLayout.NORTH);
         this.add(south(), BorderLayout.SOUTH);
+
+        addListener();
     }
 
     public Component north() {
@@ -45,5 +48,10 @@ public class ConfigPanel extends JPanel {
         panel.add(bSubmit);
 
         return panel;
+    }
+
+    public void addListener() {
+        ConfigListener configListener = new ConfigListener();
+        bSubmit.addActionListener(configListener);
     }
 }
