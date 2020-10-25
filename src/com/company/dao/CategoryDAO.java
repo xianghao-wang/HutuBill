@@ -3,10 +3,7 @@ package com.company.dao;
 import com.company.entity.Category;
 import com.company.util.DBUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class CategoryDAO implements DAO<Category> {
     public void add(Category obj) {
         String sql = "INSERT INTO category VALUE (NULL, ?)";
         try (Connection c = DBUtil.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, obj.getName());
             ps.execute();
@@ -33,12 +30,11 @@ public class CategoryDAO implements DAO<Category> {
     }
 
     @Override
-    public void delete(Category obj) {
+    public void delete(int id) {
         String sql = "DELETE FROM category WHERE id=?";
         try (Connection c = DBUtil.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            int id = obj.getId();
             ps.setInt(1, id);
             ps.execute();
 

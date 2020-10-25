@@ -15,7 +15,7 @@ public class RecordDAO implements DAO<Record> {
     public void add(Record obj) {
         String sql = "INSERT INTO record VALUE (NULL, ?, ?, ?)";
         try (Connection c = DBUtil.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+             PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             int spend = obj.getSpend();
             int category_id = obj.getCategory_id();
@@ -39,26 +39,14 @@ public class RecordDAO implements DAO<Record> {
     }
 
     @Override
-    public void delete(Record obj) {
-        String sql = "INSERT INTO record VALUE (NULL, ?, ?, ?)";
+    public void delete(int id) {
+        String sql = "DELETE FROM record WHERE id=?";
         try (Connection c = DBUtil.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            int spend = obj.getSpend();
-            int category_id = obj.getCategory_id();
-            java.sql.Date date = DateUtil.util2sql(obj.getDate());
-
-            ps.setInt(1, spend);
-            ps.setInt(2, category_id);
-            ps.setDate(3, date);
+            ps.setInt(1, id);
 
             ps.execute();
-
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt(1);
-                obj.setId(id);
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -254,5 +242,33 @@ public class RecordDAO implements DAO<Record> {
 
         return null;
 
+    }
+
+    public List<Record> list(int category_id) {
+        List<Record> records = new ArrayList<>();
+
+        String sql = "SELECT * FROM record WHERE category_id=?";
+        try (Connection c = DBUtil.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setInt(1, category_id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Record record = new Record();
+                record.setId(rs.getInt("id"));
+                record.setSpend(rs.getInt("spend"));
+                record.setCategory_id(rs.getInt("category_id"));
+                record.setComment(rs.getString("comment"));
+                record.setDate(rs.getDate("date"));
+
+                records.add(record);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return records;
     }
 }

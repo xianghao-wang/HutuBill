@@ -30,12 +30,12 @@ public class ConfigDAO implements DAO<Config> {
     }
 
     @Override
-    public void delete(Config obj) {
+    public void delete(int id) {
         String sql = "DELETE FROM config WHERE id=?";
         try (Connection c = DBUtil.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            ps.setInt(1, obj.getId());
+            ps.setInt(1, id);
             ps.execute();
 
         } catch (SQLException e) {

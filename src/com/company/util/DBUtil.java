@@ -11,7 +11,7 @@ public class DBUtil {
     public static String DATABASE = "hutubill";
     public static String ENCODING = "utf-8";
     public static String USER = "root";
-    public static String PASSWORD = "18244682566";
+    public static String PASSWORD = "WXH200109";
 
     public static Connection getConnection() throws SQLException {
         String url = String.format("jdbc:mysql://%s:%d/%s?characterEncoding=%s", URL, PORT, DATABASE, ENCODING);
